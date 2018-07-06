@@ -9,7 +9,7 @@ Add `ex_compose` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:ex_compose, "~> 0.2.0"}
+    {:ex_compose, "~> 1.0.0"}
   ]
 end
 ```
@@ -41,13 +41,23 @@ Then run:
 ```elixir
 # relative path to the template .xlsx file from your project root
 template_file = "priv/static/docs/report_template.xlsx"
+
+# desired .xlsx file (relative path from project root)
 destination_file = "priv/static/monthly_reports/2019-02-report.xlsx"
 
-# if you are unsure about your project root,
-# from anywhere in your project,
+# all optional
+options = %{
+	delimiter: {"[[", "]]"}, # instead of "{{" "}}"
+	tmp_dir_header: "MonthlyReport"
+}
+
+# run this from anywhere in your project to get the project root
 IO.inspect(File.cwd!, label: "the project root")
 
-{:ok, result_file} = ExCompose.write_xlsx(%{"name" => "John Doe", "city" => "Brisbane", "total_income" => "120000"}, :gsub, template_file, destination_file)
+{:ok, result_file} = ExCompose.write_xlsx(%{"name" => "John Doe", "city" => "Brisbane", "total_income" => "120000", options}, :gsub, template_file, destination_file)
+# or
+{:ok, result_file} = ExCompose.write_xlsx(%{"name" => "John Doe", "city" => "Brisbane", "total_income" => "120000", options}, :gsub, template_file, destination_file, options)
+
 ```
 
 ## FAQ
