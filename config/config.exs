@@ -2,6 +2,10 @@
 # and its dependencies with the aid of the Mix.Config module.
 use Mix.Config
 
+config :ex_compose,
+	tmp_dir: "tmp", # should be relative to project root
+	time_zone: {8, "Asia/Singapore"}
+
 # This configuration is loaded before any dependency and is restricted
 # to this project. If another project depends on this project, this
 # file won't be loaded nor affect the parent project. For this reason,
