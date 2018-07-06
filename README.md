@@ -27,12 +27,30 @@ config :ex_compose,
 ```
 `tmp_dir`: the relative path to a folder from your project root. That folder will be the working directory for `ex_compose`.
 e.g. if your project is at `/Users/MOI/workspace/my_app`, and `tmp_dir` is set to `temp`, ex_compose will work in the folder `/Users/MOI/workspace/my_app/tmp_dir`.
+
 `time_zone`: `ex_compose` for logging and operating purposes. Input `{tz_offset, iana_time_zone}`, where `tz_offset` is an integer or float for the number of hours of offset for your server's time zone, and `iana_time_zone` is the country time zone code. This will be used to timestamp the working files.
 
 ### Write XLSX Files
 
+Say you have an simple empty report template with the cells for `name`, `city` and `total_income` to be filled up.
+
+In your template xlsx file, in the desired cells, add in the values `{{name}}`, `{{city}}` and `{{total_income}}` respectively. Custom tags are supported, check out the next section later.
+
+Then run:
+
 ```elixir
+# relative path to the template .xlsx file from your project root
+template_file = "priv/static/docs/report_template.xlsx"
+destination_file = "priv/static/monthly_reports/2019-02-report.xlsx"
 
+# if you are unsure about your project root,
+# from anywhere in your project,
+IO.inspect(File.cwd!, label: "the project root")
 
-ExCompose.write_xlsx(%{})
+{:ok, result_file} = ExCompose.write_xlsx(%{"name" => "John Doe", "city" => "Brisbane", "total_income" => "120000"}, :gsub, template_file, destination_file)
+```
 
+## FAQ
+
+- `:gsub`?
+More writing options next time.

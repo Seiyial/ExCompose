@@ -5,7 +5,7 @@ defmodule ExCompose.TempDir do
 		parent_tmp_dir = get_temp_dir()
 		new_folder_name = case folder_header do
 			nil -> gen_time()
-			"" -> gen_time() <> "___" <> folder_header
+			value -> gen_time() <> "___" <> value
 		end
 
 		# raise exception if error

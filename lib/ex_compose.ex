@@ -29,8 +29,9 @@ defmodule ExCompose do
 
 		# repackage xlsx
 		dest_path = Pathfinder.join(:cwd, dest_proj_path)
-		Packer.pack_xlsx(folder_proj_path, dest_path, options)
+		
+		{:ok, result_file} = Packer.pack_xlsx(folder_proj_path, dest_path, options)
+		
+		{:ok, List.to_string(result_file)}
 	end
 end
-
-# ExCompose.write_xlsx(%{"merch_name" => "SEIYIAN REALMS INC"}, :gsub, "test/data/before.xlsx", "test/data/produce.xlsx", %{tmp_dir_header: "WEWIN"})
