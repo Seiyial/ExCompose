@@ -41,13 +41,24 @@ Then run:
 ```elixir
 # relative path to the template .xlsx file from your project root
 template_file = "priv/static/docs/report_template.xlsx"
+
+# desired .xlsx file (relative path from project root)
 destination_file = "priv/static/monthly_reports/2019-02-report.xlsx"
+
+# all optional
+options = %{
+	delimiter: {"[[", "]]"}, # instead of "{{" "}}"
+	tmp_dir_header: "MonthlyReport"
+}
 
 # if you are unsure about your project root,
 # from anywhere in your project,
 IO.inspect(File.cwd!, label: "the project root")
 
-{:ok, result_file} = ExCompose.write_xlsx(%{"name" => "John Doe", "city" => "Brisbane", "total_income" => "120000"}, :gsub, template_file, destination_file)
+{:ok, result_file} = ExCompose.write_xlsx(%{"name" => "John Doe", "city" => "Brisbane", "total_income" => "120000", options}, :gsub, template_file, destination_file)
+# or
+{:ok, result_file} = ExCompose.write_xlsx(%{"name" => "John Doe", "city" => "Brisbane", "total_income" => "120000", options}, :gsub, template_file, destination_file, options)
+
 ```
 
 ## FAQ
