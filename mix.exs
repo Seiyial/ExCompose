@@ -1,10 +1,19 @@
-defmodule Excompose.MixProject do
+defmodule ExCompose.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :excompose,
-      version: "0.1.0",
+      app: :ex_compose,
+      name: "ExCompose",
+      version: "1.0.0",
+      description: "A library for composing XLSX files based off templates, with full support of template styling.",
+      package: [
+        name: "ex_compose",
+        licenses: ["MIT"],
+        links: %{"GitHub" => "https://github.com/Seiyial/ExCompose"},
+        maintainers: ["Seiyial"]
+      ],
+      source_url: "https://github.com/Seiyial/ExCompose",
       elixir: "~> 1.6",
       start_permanent: Mix.env() == :prod,
       deps: deps()
@@ -21,8 +30,7 @@ defmodule Excompose.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      # {:dep_from_hexpm, "~> 0.3.0"},
-      # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"},
+      {:ex_doc, "~> 0.14", only: :dev}
     ]
   end
 end
