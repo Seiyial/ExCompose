@@ -10,11 +10,14 @@ defmodule ExCompose.Composer do
 	end
 
 	def insert_escapes(mappings) when is_map(mappings) do
-		{:ok,
-			Enum.map(mappings, fn {k, v} -> 
-				{k, insert_escapes(v)}
-			end)
-		}
+		result_map =
+			mappings
+			|> Enum.map(fn {k, v} -> 
+					{k, insert_escapes(v)}
+				end)
+			|> Map.new
+
+		{:ok, result_map}
 	end
 
 	def insert_escapes(string) when is_binary(string) do

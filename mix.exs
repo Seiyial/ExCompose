@@ -5,7 +5,7 @@ defmodule ExCompose.MixProject do
     [
       app: :ex_compose,
       name: "ExCompose",
-      version: "1.0.1",
+      version: "1.0.2",
       description: "A library for composing XLSX files based off templates, with full support of template styling.",
       package: [
         name: "ex_compose",
