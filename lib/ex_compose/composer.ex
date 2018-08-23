@@ -1,5 +1,5 @@
 defmodule ExCompose.Composer do
-	def gsub(string, %{} = mappings, {pre, post} = delimiters) when is_binary(string) do
+	def gsub(string, %{} = mappings, {pre, post} = _delimiters) when is_binary(string) do
 		result =
 			mappings
 			|> Enum.reduce(string, fn({replacer, replacement}, acc) ->
@@ -7,5 +7,19 @@ defmodule ExCompose.Composer do
 				end)
 			|> IO.inspect(label: "ENUM REDUCE")
 		{:ok, result}
+	end
+
+	def insert_escapes(mappings) when is_map(mappings) do
+		{:ok,
+			Enum.map(mappings, fn {k, v} -> 
+				{k, insert_escapes(v)}
+			end)
+		}
+	end
+
+	def insert_escapes(string) when is_binary(string) do
+		string
+		|> String.replace("&", "&amp;")
+		# insert more escape replacers here
 	end
 end

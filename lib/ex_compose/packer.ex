@@ -1,7 +1,7 @@
 defmodule ExCompose.Packer do
 
 	def unpack_xlsx(source, unpack_dir) do
-		{:ok, contents} =
+		{:ok, _contents} =
 			source
 			|> String.to_charlist
 			|> :zip.unzip(cwd: unpack_dir)

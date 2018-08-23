@@ -21,8 +21,11 @@ defmodule ExCompose do
 		celldata_file = Pathfinder.join(folder_proj_path, "xl/sharedStrings.xml")
 		{:ok, string_content} = File.read(celldata_file)
 
+		# Refine Mappings
+		{:ok, refined_mappings} = Composer.insert_escapes(mappings)
+
 		# REPLACE!
-		{:ok, new_string_content} = Composer.gsub(string_content, mappings, options[:delimiter] || {"{{", "}}"})
+		{:ok, new_string_content} = Composer.gsub(string_content, refined_mappings, options[:delimiter] || {"{{", "}}"})
 
 		# write SharedStrings file
 		:ok = File.write(celldata_file, new_string_content)
